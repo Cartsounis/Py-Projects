@@ -1,15 +1,14 @@
 import random
 
-rank_name = {"1": "Ace", "2": "Two",
-             "3": "Three", "4": "Four",
-             "5": "Five", "6": "Six",
-             "7": "Seven", "8": "Eight",
-             "9": "Nine", "10": "Ten",
-             "11": "Jack", "12": "Queen",
-             "13": "King"}
+rank_name = {"1": "Ás", "2": "Dois",
+             "3": "Três", "4": "Quatro",
+             "5": "Cinco", "6": "Seis",
+             "7": "Sete",
+             "11": "Dama", "12": "Valete",
+             "13": "Rei"}
 
-suit_name = {"1": "Clubs", "2" : "Diamonds",
-             "3": "Hearts", "4" : "Spades"}
+suit_name = {"1": "Paus", "2" : "Ouros",
+             "3": "Copas", "4" : "Espadas"}
 
 class Card():
     def __init__(self, rank, suit):
@@ -17,7 +16,7 @@ class Card():
         self._suit = suit
 
     def __str__(self):
-        return "%s of %s" % (rank_name[self._rank], 
+        return "%s de %s" % (rank_name[self._rank], 
                              suit_name[self._suit])
 
     def getSuit(self) -> str:
@@ -45,16 +44,9 @@ class Deck(list):
         new_deck = self[cutting_card:] + self[:cutting_card]
         self = new_deck
 
-    def draw(self, which : str):
-        """Removes the 'top', 'bottom' or a 'random' card. (top by default)"""
-        which = which.lower()
-        try:
-            if which == 'bottom':
-                return self.pop(0)
-            elif which == 'random':
-                return self.pop(random.randint(0, len(self)-1))
-        except:
-            return self.pop()
+    def draw(self) -> Card:
+        """Removes the top card."""
+        return self.pop()
         
     def printCards(self):
         for card in self:
@@ -64,7 +56,7 @@ class Deck(list):
         """Shuffles the deck"""
         random.shuffle(self)
 
-class Hand(Deck):
+class Hand(list):
     def __init__(self):
         pass
 
