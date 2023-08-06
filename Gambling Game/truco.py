@@ -43,9 +43,6 @@ class Game:
     def printTable(self):
         for index, card in enumerate(self._table):
             print(self._player_list[index].getName() + ' jogou um ' + str(card))
-    
-    def printRoundResult(self):
-        self.printTable()
 
     def checkRoundWinner(self, playerRounds, rivalRounds) -> tuple:
         higherCard = 0
@@ -54,11 +51,11 @@ class Game:
             if (card.getRankNumber() > higherCard):
                 higherCard = card.getRankNumber()
                 winningPlayer = self._player_list[index].getName()
-            print(self._player_list[index].getName() + ' jogou um ' + str(card))
-        
-        # print(winningPlayer + ' que jogou ' + str(higherCard))
-        if (winningPlayer.lower() in 'rival'):
+
+        if (winningPlayer.lower().count('rival')):
+            print('Your rival won the round because he played %s' % (higherCard))
             return playerRounds+0,rivalRounds+1
+        print('You won the round because you played %s' % (higherCard))
         return playerRounds+1,rivalRounds+0
 
     def run(self):
@@ -84,25 +81,31 @@ class Game:
                 self.nextPlayer()
             
             # self.printTable()
+            self.printTable()
             self.player_rounds, self.rival_rounds = self.checkRoundWinner(self.player_rounds, self.rival_rounds)
             self._table = []
 
-            if((self.player_rounds or self.rival_rounds) >= 2):
-                if(self.rival_rounds >= 2):
-                    self.rival_points += self.worth
-                    print('Rival won %s points' % (self.worth))
+            # How to improve this next 2 if statement?
+            if (self.player_rounds >= 2):
                 self.restart()
                 self.player_points += self.worth
                 print('You won %s points' % (self.worth))
                 print('You have %s points, and your oponent have %s' % (self.player_points, self.rival_points))
+    
+            if (self.rival_rounds >= 2):
+                self.restart()
+                self.rival_points += self.worth
+                print('Your oponent won %s points' % (self.worth))
+                print('You have %s points, and your oponent have %s' % (self.player_points, self.rival_points))
 
-            # game over
-            if (self.rival_points or self.player_points) >= 12:
-                if (self.player_points >= 12):
-                    self._running = False
-                    print('You won, congratulations!')
-                    break
+            # Game Over (Same thing on previous comment - improving if statements)
+            if (self.rival_points >= 12):
                 print('You lose, keep improving your game!')
+                break
+        
+            if (self.player_points >= 12):
+                print('You won, congratulations!')
+                break
         return 0
 
 def main():
