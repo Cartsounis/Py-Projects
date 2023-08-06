@@ -25,6 +25,9 @@ class Card():
     def getRank(self) -> str:
         return rank_name(self._rank)
     
+    def getRankNumber(self) -> int:
+        return int(self._rank)
+    
     def setSuit(self, suit):
         self._suit = suit
 
@@ -55,29 +58,6 @@ class Deck(list):
     def shuffle(self):
         """Shuffles the deck"""
         random.shuffle(self)
-
-class Hand(list):
-    def __init__(self):
-        pass
-
-    def pickCard(self, card : Card):
-        self.append(card)
-
-    def discardCard(self, which : str):
-        """Discard the 'first', 'second' or the 'third' card. (Third by default)"""
-        which = which.lower()
-        try:
-            if which == 'first':                
-                return self.pop(0)
-            elif which == 'second':
-                return self.pop(1)
-        except:
-            return self.pop()
-
-
-    
-    
-
 
     
 
