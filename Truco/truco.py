@@ -60,7 +60,7 @@ class Game:
 
     def run(self):
         self.dealCards()
-        # print('Game is set, type "exit" to quit.')
+        print('Game is set, type "exit" to quit. Have fun\n')
         while (self._running):
             self.worth = 2
 
@@ -89,22 +89,22 @@ class Game:
             if (self.player_rounds >= 2):
                 self.restart()
                 self.player_points += self.worth
-                print('You won %s points' % (self.worth))
-                print('You have %s points, and your oponent have %s' % (self.player_points, self.rival_points))
+                print('\nYou won %s points' % (self.worth))
+                print('You have %s points, and your oponent have %s\n' % (self.player_points, self.rival_points))
     
             if (self.rival_rounds >= 2):
                 self.restart()
                 self.rival_points += self.worth
-                print('Your oponent won %s points' % (self.worth))
-                print('You have %s points, and your oponent have %s' % (self.player_points, self.rival_points))
+                print('\nYour oponent won %s points' % (self.worth))
+                print('You have %s points, and your oponent have %s\n' % (self.player_points, self.rival_points))
 
             # Game Over (Same thing on previous comment - improving if statements)
             if (self.rival_points >= 12):
-                print('You lose, keep improving your game!')
+                print('\nYou lose, keep improving your game!\n')
                 break
         
             if (self.player_points >= 12):
-                print('You won, congratulations!')
+                print('\nYou won, congratulations!\n')
                 break
         return 0
 
