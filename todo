@@ -4,6 +4,6 @@ feat: add manilhas (4 specific cards that have more value)
 (done)fix: bug when choosing card to play
 feat: add bot ai
 refactor: improve if statements at the end of run()
-feat: change who begins depending on who wons the previous round
+(done) feat: change who begins depending on who wons the previous round
 (done)fix: show the table before player decision
 

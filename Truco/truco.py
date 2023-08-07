@@ -52,7 +52,12 @@ class Game:
             if ((multFactor * card.getRankNumber()) > higherCardNumber):
                 higherCard = card
                 higherCardNumber = multFactor * card.getRankNumber()
+                winningPlayerIndex = index
                 winningPlayer = self._player_list[index].getName()
+
+        # Change the starter player depending on who won the last round
+        for i in range(winningPlayerIndex):
+            self.nextPlayer()
 
         if (winningPlayer.lower().count('rival')):
             print('Your rival won the round because they played %s\n' % str(higherCard).lower())
