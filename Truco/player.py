@@ -1,5 +1,7 @@
 import cards
 
+import random as r
+
 class Player:
     def __init__(self, name : str, bot : bool):
         self._name = name
@@ -31,8 +33,8 @@ class Player:
                 return self._cards.pop(int(which)-1)
             except:
                 return self._cards.pop(0)
-        #implement ai algorithm
-        return self._cards.pop(0)
+        #implement ai algorithm, for now its random
+        return self._cards.pop(r.randint(0,len(self._cards)-1))
     
     def takeCard(self, card : cards.Card):
         self._cards.append(card)
