@@ -28,7 +28,6 @@ class Player:
 
     def playCard(self, which : str = '1') -> cards.Card:
         if (not self._bot):
-            print(which)
             try: 
                 return self._cards.pop(int(which)-1)
             except:

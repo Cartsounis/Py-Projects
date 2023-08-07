@@ -5,4 +5,5 @@ feat: add manilhas (4 specific cards that have more value)
 feat: add bot ai
 refactor: improve if statements at the end of run()
 feat: change who begins depending on who wons the previous round
+(done)fix: show the table before player decision
 

@@ -14,8 +14,8 @@ class Game:
         self._ally = player.Player('Ally', True)
         self._rival_right = player.Player('Rival on the right', True)
         self._rival_left = player.Player('Rival on the left', True)
-        self._player_list = [self._player,self._rival_right,
-                                  self._ally,self._rival_left]
+        self._player_list = [self._player, self._rival_right,
+                                self._ally, self._rival_left]
         self._running = True
         
     def getNextPlayer(self) -> player.Player:
@@ -40,9 +40,6 @@ class Game:
         self._deck = cards.Deck()
         self.dealCards()
 
-    def printTable(self):
-        for index, card in enumerate(self._table):
-            print(self._player_list[index].getName() + ' jogou um ' + str(card))
 
     def checkRoundWinner(self, playerRounds, rivalRounds) -> tuple:
         higherCard = cards.Card
@@ -58,9 +55,9 @@ class Game:
                 winningPlayer = self._player_list[index].getName()
 
         if (winningPlayer.lower().count('rival')):
-            print('Your rival won the round because they played %s' % (higherCard))
+            print('Your rival won the round because they played %s\n' % str(higherCard).lower())
             return playerRounds+0,rivalRounds+1
-        print('You won the round because your team played %s' % (higherCard))
+        print('You won the round because your team played %s\n' % str(higherCard).lower())
         return playerRounds+1,rivalRounds+0
 
     def run(self):
@@ -70,22 +67,26 @@ class Game:
             self.worth = 2
 
             for i in range(4):
-                #player turn
+                # Player turn
                 player = self.getNextPlayer()
                 if (player.getName().lower() == 'player'):
+                    if(i == 0):
+                        print('You start playing')
                     player.printPlayerCards()
                     choice = input()
                     if (choice.lower() == 'exit'):
                         return 0
-                    self._table.append(player.playCard(choice))
+                    choosenCard = player.playCard(choice)
+                    self._table.append(choosenCard)
+                    print(self._player_list[0].getName() + ' jogou um ' + str(choosenCard).lower())
                     self.nextPlayer()
                     continue
-                    #input decision
-                #any bot turn 
-                self._table.append(player.playCard())
+                # Any of bots turn
+                choosenCard = player.playCard()
+                self._table.append(choosenCard)
+                print(self._player_list[0].getName() + ' jogou um ' + str(choosenCard).lower())
                 self.nextPlayer()
             
-            self.printTable()
             self.player_rounds, self.rival_rounds = self.checkRoundWinner(self.player_rounds, self.rival_rounds)
             self._table = []
 
