@@ -45,17 +45,22 @@ class Game:
             print(self._player_list[index].getName() + ' jogou um ' + str(card))
 
     def checkRoundWinner(self, playerRounds, rivalRounds) -> tuple:
-        higherCard = 0
+        higherCard = cards.Card
+        higherCardNumber = 0
+        multFactor = 1
         winningPlayer = ''
         for index, card in enumerate(self._table):
-            if (card.getRankNumber() > higherCard):
-                higherCard = card.getRankNumber()
+            if card.getRankNumber() <= 3: multFactor = 100
+            else: multFactor = 1
+            if ((multFactor * card.getRankNumber()) > higherCardNumber):
+                higherCard = card
+                higherCardNumber = multFactor * card.getRankNumber()
                 winningPlayer = self._player_list[index].getName()
 
         if (winningPlayer.lower().count('rival')):
-            print('Your rival won the round because he played %s' % (higherCard))
+            print('Your rival won the round because they played %s' % (higherCard))
             return playerRounds+0,rivalRounds+1
-        print('You won the round because you played %s' % (higherCard))
+        print('You won the round because your team played %s' % (higherCard))
         return playerRounds+1,rivalRounds+0
 
     def run(self):
@@ -80,7 +85,6 @@ class Game:
                 self._table.append(player.playCard())
                 self.nextPlayer()
             
-            # self.printTable()
             self.printTable()
             self.player_rounds, self.rival_rounds = self.checkRoundWinner(self.player_rounds, self.rival_rounds)
             self._table = []
@@ -91,8 +95,7 @@ class Game:
                 self.player_points += self.worth
                 print('\nYou won %s points' % (self.worth))
                 print('You have %s points, and your oponent have %s\n' % (self.player_points, self.rival_points))
-    
-            if (self.rival_rounds >= 2):
+            elif (self.rival_rounds >= 2):
                 self.restart()
                 self.rival_points += self.worth
                 print('\nYour oponent won %s points' % (self.worth))
@@ -102,8 +105,7 @@ class Game:
             if (self.rival_points >= 12):
                 print('\nYou lose, keep improving your game!\n')
                 break
-        
-            if (self.player_points >= 12):
+            elif (self.player_points >= 12):
                 print('\nYou won, congratulations!\n')
                 break
         return 0

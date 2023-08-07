@@ -1,7 +1,8 @@
 feat: add truco (increase worthy points)
 feat: add manilhas (4 specific cards that have more value)
-fix: change rank order (1, 2 and 3 are stronger than 4, 5, 6, 7, 10, 11, 12)
-fix: bug when choosing card to play
+(done)fix: change rank order (1, 2 and 3 are stronger than 4, 5, 6, 7, 10, 11, 12)
+(done)fix: bug when choosing card to play
 feat: add bot ai
 refactor: improve if statements at the end of run()
+feat: change who begins depending on who wons the previous round
 
