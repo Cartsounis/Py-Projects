@@ -24,13 +24,14 @@ class Player:
             hand_str += str(card).lower() + ' (%s), ' % (index+1)
         print(hand_str + 'qual carta deseja jogar?')
 
-    def playCard(self, which : int = 1) -> cards.Card:
-        #implement ai algorithm
+    def playCard(self, which : str = '1') -> cards.Card:
         if (not self._bot):
-            try:   
-                return self._cards.pop(which-1)
+            print(which)
+            try: 
+                return self._cards.pop(int(which)-1)
             except:
                 return self._cards.pop(0)
+        #implement ai algorithm
         return self._cards.pop(0)
     
     def takeCard(self, card : cards.Card):
